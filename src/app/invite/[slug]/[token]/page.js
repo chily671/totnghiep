@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
-import GraduationTemplate01 from "@/components/templates/GraduationTemplate01";
+import GuestInvitationClient from "@/components/GuestInvitationClient";
 import { recipientIdFromToken } from "@/lib/admin-auth";
 import { normalizeRecipientName } from "@/lib/invitation-recipients";
 import { invitationRecipientsCollection, invitationsCollection } from "@/lib/mongodb";
@@ -56,5 +56,11 @@ async function RecipientInvitationDetails({ params }) {
     permanentRedirect(`/invite/${encodeURIComponent(canonicalSlug)}/${encodeURIComponent(token)}`);
   }
 
-  return <GraduationTemplate01 invitation={invitation} recipientName={recipient.name} />;
+  return (
+    <GuestInvitationClient
+      invitation={invitation}
+      recipientName={recipient.name}
+      recipientToken={token}
+    />
+  );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import GraduationTemplate01 from "@/components/templates/GraduationTemplate01";
+import GuestInvitationClient from "@/components/GuestInvitationClient";
 
 export default function PublicInvitation() {
   const [invitation, setInvitation] = useState(undefined);
@@ -51,5 +51,5 @@ export default function PublicInvitation() {
     );
   }
 
-  return <GraduationTemplate01 invitation={invitation} />;
+  return <GuestInvitationClient invitation={invitation} />;
 }

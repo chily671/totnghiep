@@ -1,5 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap");
 
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  src:
+    url("/fonts/montserrat-v25-latin-800.woff2") format("woff2"),
+    url("/fonts/montserrat-v25-latin-800.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MRCH NewYork";
+  src: url("/fonts/mrch-newyork.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 .grad-page {
   --grad-gold: #c6a45b;
   --grad-gold-light: #f1d99b;
@@ -37,6 +54,7 @@
   box-shadow:
     0 24px 90px rgba(0, 0, 0, 0.6),
     0 0 35px rgba(198, 164, 91, 0.06);
+  font-family: "MRCH NewYork", sans-serif;
 }
 
 .grad-card-grain {
@@ -58,6 +76,7 @@
   z-index: 2;
   padding: 30px 22px 22px;
   text-align: center;
+  margin-left: 25%;
 }
 
 .grad-university-lockup {
@@ -131,7 +150,8 @@
 .grad-script {
   margin: 0;
   color: var(--grad-gold-light);
-  font-family: "Great Vibes", cursive;
+  /* font-family: "Great Vibes", cursive; */
+  font-family: "MRCH NewYork", sans-serif;
   font-size: clamp(27px, 7vw, 38px);
   line-height: 1.35;
 }
@@ -173,7 +193,7 @@
   top: 0;
   left: 5%;
   width: clamp(76px, 22%, 112px);
-  height: clamp(250px, 38vw, 330px);
+  height: clamp(350px, 38vw, 330px);
   padding: 5px;
   background: linear-gradient(
     100deg,
@@ -205,7 +225,7 @@
 .grad-ribbon-name {
   color: var(--grad-gold-light);
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(13px, 3.4vw, 18px);
+  font-size: clamp(28px, 3.4vw, 18px);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-align: center;
@@ -217,7 +237,7 @@
 .grad-ribbon-faculty {
   max-width: 78%;
   color: rgba(241, 217, 155, 0.75);
-  font-size: 6px;
+  font-size: 7px;
   line-height: 1.4;
   letter-spacing: 0.08em;
   text-align: center;
@@ -471,7 +491,7 @@
 
 .grad-countdown-number {
   color: var(--grad-gold-light);
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "monserrat", sans-serif;
   font-size: 26px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -538,9 +558,13 @@
 }
 
 .grad-cover {
-  position: absolute;
-  z-index: 20;
+  position: fixed;
+  z-index: 1000;
   inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  box-sizing: border-box;
   display: grid;
   place-items: center;
   padding: 28px;
@@ -672,6 +696,184 @@
   animation-play-state: running;
 }
 
+/* ================================
+   GRADUATION WISHES
+================================ */
+
+.grad-wishes {
+  width: min(100% - 48px, 430px);
+  margin: 65px auto 55px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.grad-wishes-heading {
+  margin-bottom: 34px;
+  text-align: center;
+}
+
+.grad-wishes-kicker {
+  display: block;
+  margin-bottom: 15px;
+  color: var(--grad-gold);
+  font-family: "Montserrat", sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+}
+
+.grad-wishes-heading h2 {
+  margin: 0;
+  color: var(--grad-gold-light);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(34px, 8vw, 42px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: 0.015em;
+}
+
+.grad-wishes-heading p {
+  max-width: 310px;
+  margin: 13px auto 0;
+  color: rgba(245, 237, 218, 0.62);
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+.grad-wishes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  text-align: left;
+}
+
+.grad-wishes-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.grad-wishes-field > span:first-child {
+  color: rgba(241, 217, 155, 0.85);
+  font-family: "Montserrat", sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+}
+
+.grad-wishes-field input,
+.grad-wishes-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid rgba(198, 164, 91, 0.35);
+  border-radius: 0;
+  outline: none;
+  padding: 12px 2px 14px;
+  background: transparent;
+  color: #f5edda;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.8;
+  transition: border-color 0.3s ease;
+}
+
+.grad-wishes-field input:focus,
+.grad-wishes-field textarea:focus {
+  border-bottom-color: var(--grad-gold-light);
+}
+
+.grad-wishes-field input::placeholder,
+.grad-wishes-field textarea::placeholder {
+  color: rgba(245, 237, 218, 0.34);
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+}
+
+.grad-wishes-field textarea {
+  min-height: 105px;
+  resize: vertical;
+  line-height: 1.9;
+}
+
+.grad-wishes-counter {
+  align-self: flex-end;
+  color: rgba(245, 237, 218, 0.38);
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.grad-wishes-submit {
+  display: inline-flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 44px;
+  margin-top: 5px;
+  padding: 0 24px;
+  border: 1px solid rgba(198, 164, 91, 0.75);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--grad-gold-light);
+  font-family: "Montserrat", sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.grad-wishes-submit:hover:not(:disabled) {
+  background: var(--grad-gold);
+  color: #090909;
+  box-shadow: 0 5px 22px rgba(198, 164, 91, 0.12);
+}
+
+.grad-wishes-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.grad-wishes-status {
+  margin: 0;
+  color: var(--grad-gold-light);
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.8;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .grad-wishes {
+    width: calc(100% - 48px);
+    margin-top: 50px;
+    margin-bottom: 45px;
+  }
+
+  .grad-wishes-form {
+    gap: 23px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grad-wishes-field input,
+  .grad-wishes-field textarea,
+  .grad-wishes-submit {
+    transition: none;
+  }
+}
+
 @keyframes grad-ribbon-drop {
   from {
     opacity: 0;
@@ -775,5 +977,285 @@
   .grad-open-button:hover,
   .grad-music-button:hover {
     transform: none;
+  }
+}
+
+/* Refined date & venue card — black / champagne gold */
+.grad-date-card {
+  position: relative;
+  width: min(100%, 410px);
+  margin: 30px auto 0;
+  padding: 27px 22px 30px;
+  overflow: hidden;
+  border: 1px solid rgba(198, 164, 91, 0.62);
+  border-radius: 22px;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(241, 217, 155, 0.12),
+      transparent 58%
+    ),
+    linear-gradient(155deg, #17140e 0%, #0b0b0a 55%, #15110a 100%);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.42),
+    inset 0 0 0 5px rgba(198, 164, 91, 0.035),
+    inset 0 0 35px rgba(198, 164, 91, 0.045);
+  text-align: center;
+}
+
+.grad-date-card::before,
+.grad-date-card::after {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-color: rgba(241, 217, 155, 0.52);
+  content: "";
+  pointer-events: none;
+}
+
+.grad-date-card::before {
+  top: 10px;
+  left: 10px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-radius: 10px 0 0;
+}
+
+.grad-date-card::after {
+  right: 10px;
+  bottom: 10px;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 0 0 10px;
+}
+
+.grad-date-card-top {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.grad-date-card-kicker {
+  color: var(--grad-gold-light);
+  font-family: "Montserrat", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.grad-date-card-time {
+  color: rgba(245, 237, 218, 0.88);
+  /* font-family: "Cormorant Garamond", Georgia, serif; */
+  font-family: "MRCH NewYork", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.grad-date-display {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin: 17px 0 15px;
+}
+
+.grad-date-month,
+.grad-date-year {
+  color: var(--grad-gold-light);
+  font-family: "MRCH NewYork", sans-serif;
+  font-size: clamp(13px, 3.5vw, 20px);
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.grad-date-day {
+  color: transparent;
+  background: linear-gradient(
+    145deg,
+    #fff0bd 8%,
+    #c6a45b 48%,
+    #f8e8b9 78%,
+    #9b7739
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-family: "MRCH NewYork", sans-serif;
+  font-size: clamp(62px, 15vw, 88px);
+  font-weight: 700;
+  line-height: 0.9;
+  font-variant-numeric: lining-nums;
+  text-shadow: 0 5px 25px rgba(198, 164, 91, 0.12);
+}
+
+.grad-date-venue {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 20px;
+}
+
+.grad-date-at {
+  color: rgba(241, 217, 155, 0.68);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.grad-date-venue strong {
+  max-width: 310px;
+  color: #f5edda;
+  font-family: "MRCH NewYork", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.grad-date-address {
+  max-width: 310px;
+  color: rgba(245, 237, 218, 0.58);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.grad-date-pin {
+  display: grid;
+  width: 32px;
+  height: 36px;
+  place-items: center;
+  margin: 14px auto 8px;
+  color: var(--grad-gold-light);
+  filter: drop-shadow(0 3px 8px rgba(198, 164, 91, 0.22));
+}
+
+.grad-date-pin svg {
+  width: 29px;
+  height: 29px;
+  overflow: visible;
+  fill: var(--grad-gold);
+  stroke: var(--grad-gold-light);
+  stroke-width: 1.1;
+}
+
+.grad-date-pin svg circle {
+  fill: #11100d;
+  stroke: #11100d;
+}
+
+.grad-date-map-link,
+.grad-date-map-hint {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--grad-gold-light);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-decoration: underline;
+  text-decoration-color: rgba(241, 217, 155, 0.55);
+  text-underline-offset: 4px;
+}
+
+.grad-date-map-link {
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.grad-date-map-link:hover {
+  color: #fff4cf;
+  text-decoration-color: #fff4cf;
+}
+
+@media (max-width: 380px) {
+  .grad-date-card {
+    padding: 25px 14px 27px;
+    border-radius: 18px;
+  }
+
+  .grad-date-display {
+    gap: 6px;
+  }
+  .grad-date-month,
+  .grad-date-year {
+    font-size: 12px;
+  }
+  .grad-date-venue strong {
+    font-size: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grad-date-map-link {
+    transition: none;
+  }
+}
+
+/* Date card actions: map on the left, direct contact on the right */
+.grad-date-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 23px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(198, 164, 91, 0.24);
+}
+
+.grad-date-action {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 6px;
+}
+
+.grad-date-action + .grad-date-action {
+  border-left: 1px solid rgba(198, 164, 91, 0.24);
+}
+
+.grad-date-action-label {
+  color: rgba(241, 217, 155, 0.68);
+  font-family: "Montserrat", sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.grad-date-actions .grad-date-map-link,
+.grad-date-actions .grad-date-map-hint {
+  margin-top: 0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.grad-date-contact-link {
+  color: var(--grad-gold-light);
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
+}
+
+.grad-date-contact-link:hover {
+  color: #fff4cf;
+}
+
+@media (max-width: 380px) {
+  .grad-date-actions {
+    gap: 5px;
+  }
+
+  .grad-date-contact-link {
+    font-size: 11px;
   }
 }

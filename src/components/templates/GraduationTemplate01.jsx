@@ -17,6 +17,7 @@ const EMPTY_INVITATION = Object.freeze({
   venueName: "",
   venueAddress: "",
   mapsUrl: "",
+  contactPhone: "",
   closingLine: "",
   secondaryLine: "",
   invitationMessage: "",
@@ -38,6 +39,120 @@ function formatEventDate(value) {
     minute: "2-digit",
     timeZone: "Asia/Ho_Chi_Minh",
   }).format(date);
+}
+
+function getInvitationDateParts(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  const parts = new Intl.DateTimeFormat("vi-VN", {
+    weekday: "long",
+    day: "2-digit",
+    month: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "Asia/Ho_Chi_Minh",
+  }).formatToParts(date);
+
+  const get = (type) => parts.find((part) => part.type === type)?.value || "";
+  return {
+    weekday: get("weekday").toLocaleUpperCase("vi-VN"),
+    day: get("day"),
+    month: get("month"),
+    year: get("year"),
+    time: `${get("hour")}:${get("minute")}`,
+  };
+}
+
+function GraduationDateCard({
+  eventDate,
+  venueName,
+  venueAddress,
+  mapsUrl,
+  contactPhone,
+}) {
+  const date = getInvitationDateParts(eventDate);
+
+  return (
+    <section
+      className="grad-date-card grad-reveal"
+      aria-label="Thông tin ngày và địa điểm tổ chức"
+    >
+      <div className="grad-date-card-top">
+        <span className="grad-date-card-kicker">THÂN MỜI</span>
+        <span className="grad-date-card-time">
+          {date ? `${date.time} · ${date.weekday}` : "THỜI GIAN TỔ CHỨC"}
+        </span>
+      </div>
+
+      <div
+        className="grad-date-display"
+        aria-label={
+          date
+            ? `${date.day} tháng ${date.month} năm ${date.year}`
+            : "Ngày tổ chức đang cập nhật"
+        }
+      >
+        <span className="grad-date-month">
+          {date ? `THÁNG ${date.month}` : "NGÀY"}
+        </span>
+        <strong className="grad-date-day">{date ? date.day : "--"}</strong>
+        <span className="grad-date-year">
+          {date ? `NĂM ${date.year}` : "ĐANG CẬP NHẬT"}
+        </span>
+      </div>
+
+      <div className="grad-date-venue">
+        <span className="grad-date-at">TẠI ĐIỂM</span>
+        <strong>{venueName || "ĐỊA ĐIỂM ĐANG CẬP NHẬT"}</strong>
+        {venueAddress && (
+          <span className="grad-date-address">{venueAddress}</span>
+        )}
+      </div>
+
+      <div className="grad-date-pin" aria-hidden="true">
+        <svg viewBox="0 0 24 24" role="presentation">
+          <path d="M12 22s8-8.2 8-13A8 8 0 1 0 4 9c0 4.8 8 13 8 13Z" />
+          <circle cx="12" cy="9" r="2.7" />
+        </svg>
+      </div>
+
+      <div className="grad-date-actions">
+        <div className="grad-date-action">
+          <span className="grad-date-action-label">CHỈ ĐƯỜNG</span>
+          {mapsUrl ? (
+            <a
+              className="grad-date-map-link"
+              href={mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              XEM BẢN ĐỒ <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <span className="grad-date-map-hint">ĐANG CẬP NHẬT</span>
+          )}
+        </div>
+
+        <div className="grad-date-action grad-date-contact">
+          <span className="grad-date-action-label">LIÊN HỆ</span>
+          {contactPhone ? (
+            <a
+              className="grad-date-contact-link"
+              href={`tel:${contactPhone.replace(/[^+\d]/g, "")}`}
+            >
+              {contactPhone}
+            </a>
+          ) : (
+            <span className="grad-date-map-hint">0869834020</span>
+          )}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function isCloudinaryUrl(value) {
@@ -150,10 +265,116 @@ function GoldDivider() {
   );
 }
 
+function GraduationWishes({ onSubmitWish }) {
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+  const [status, setStatus] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const trimmedName = name.trim();
+    const trimmedContent = content.trim();
+
+    if (!trimmedName || !trimmedContent) {
+      setStatus("Vui lòng nhập tên và nội dung lời chúc.");
+      return;
+    }
+
+    if (trimmedName.length > 80 || trimmedContent.length > 500) {
+      setStatus("Tên tối đa 80 ký tự, lời chúc tối đa 500 ký tự.");
+      return;
+    }
+
+    if (typeof onSubmitWish !== "function") {
+      setStatus("Chức năng gửi lời chúc đang được cập nhật.");
+      return;
+    }
+
+    setBusy(true);
+    setStatus("");
+
+    try {
+      await onSubmitWish({
+        name: trimmedName,
+        message: trimmedContent,
+      });
+
+      setName("");
+      setContent("");
+      setStatus("Lời chúc đã được gửi. Cảm ơn bạn rất nhiều!");
+    } catch (error) {
+      setStatus(error?.message || "Không thể gửi lời chúc. Vui lòng thử lại.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <section className="grad-wishes grad-reveal">
+      <div className="grad-wishes-heading">
+        <span className="grad-wishes-kicker">A NOTE FROM YOU</span>
+        <h2>Leave Your Wishes</h2>
+        <p>
+          Một lời chúc nhỏ của bạn sẽ làm cho ngày đặc biệt này trở nên đáng nhớ
+          hơn.
+        </p>
+      </div>
+
+      <form className="grad-wishes-form" onSubmit={handleSubmit}>
+        <label className="grad-wishes-field">
+          <span>TÊN CỦA BẠN</span>
+          <input
+            type="text"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            placeholder="Nhập tên của bạn"
+            maxLength={80}
+            autoComplete="name"
+            required
+            disabled={busy}
+          />
+        </label>
+
+        <label className="grad-wishes-field">
+          <span>LỜI CHÚC</span>
+          <textarea
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
+            placeholder="Gửi đôi lời chúc mừng đến tân cử nhân..."
+            maxLength={500}
+            rows={4}
+            required
+            disabled={busy}
+          />
+          <span className="grad-wishes-counter">{content.length}/500</span>
+        </label>
+
+        <button
+          type="submit"
+          className="grad-wishes-submit"
+          disabled={busy || !onSubmitWish}
+        >
+          {busy ? "ĐANG GỬI..." : "GỬI LỜI CHÚC"}
+          <span aria-hidden="true">✦</span>
+        </button>
+
+        {status && (
+          <p className="grad-wishes-status" role="status" aria-live="polite">
+            {status}
+          </p>
+        )}
+      </form>
+    </section>
+  );
+}
+
 export default function GraduationTemplate01({
   invitation,
   preview = false,
   recipientName = "",
+  onSubmitWish,
 }) {
   const data = useMemo(
     () => ({ ...EMPTY_INVITATION, ...(invitation || {}) }),
@@ -165,7 +386,35 @@ export default function GraduationTemplate01({
   const [musicPlaying, setMusicPlaying] = useState(false);
   const audioRef = useRef(null);
 
+  const handleOpenInvitation = async () => {
+    try {
+      await audioRef.current?.play();
+    } catch (error) {
+      console.log("Không thể phát nhạc:", error);
+    }
+
+    setIsOpened(true);
+  };
+
   useRevealOnScroll(opened);
+
+  // Keep the opening cover fixed to the viewport; the long invitation page
+  // must not be scrollable until the guest opens the invitation.
+  useEffect(() => {
+    if (opened) return undefined;
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousOverscroll =
+      document.documentElement.style.overscrollBehavior;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overscrollBehavior = "none";
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overscrollBehavior = previousOverscroll;
+    };
+  }, [opened]);
 
   useEffect(() => {
     if (!opening || opened) return undefined;
@@ -310,34 +559,13 @@ export default function GraduationTemplate01({
             <p className="grad-graduate-subtitle">{data.graduateName}</p>
           )}
 
-          <div className="grad-event-details">
-            <div className="grad-detail">
-              <span className="grad-detail-label">DATE & TIME</span>
-              <span className="grad-detail-value">
-                {formatEventDate(data.eventDate) || "Đang cập nhật"}
-              </span>
-            </div>
-            <div className="grad-detail">
-              <span className="grad-detail-label">LOCATION</span>
-              <span className="grad-detail-value">
-                {data.venueName || "Đang cập nhật"}
-              </span>
-            </div>
-          </div>
-
-          {data.venueAddress && (
-            <p className="grad-address">{data.venueAddress}</p>
-          )}
-          {data.mapsUrl && (
-            <a
-              href={data.mapsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="grad-map-link"
-            >
-              VIEW LOCATION <span aria-hidden="true">↗</span>
-            </a>
-          )}
+          <GraduationDateCard
+            eventDate={data.eventDate}
+            venueName={data.venueName}
+            venueAddress={data.venueAddress}
+            mapsUrl={data.mapsUrl}
+            contactPhone={data.contactPhone}
+          />
 
           {data.invitationMessage && (
             <p className="grad-message">{data.invitationMessage}</p>
@@ -350,6 +578,7 @@ export default function GraduationTemplate01({
             </div>
           )}
         </section>
+        <GraduationWishes onSubmitWish={onSubmitWish} />
 
         <footer className="grad-footer grad-reveal">
           <GoldDivider />
@@ -359,7 +588,12 @@ export default function GraduationTemplate01({
 
         {musicUrl && (
           <>
-            <audio ref={audioRef} src={musicUrl} loop preload="none" />
+            <audio
+              ref={audioRef}
+              src="/music/background-music.mp3"
+              loop
+              preload="auto"
+            />
             <button
               type="button"
               onClick={toggleMusic}
@@ -399,7 +633,7 @@ export default function GraduationTemplate01({
                 className="grad-open-button"
                 disabled={opening}
               >
-                <span>OPEN INVITATION</span>
+                <span>MỞ THIỆP</span>
                 <span aria-hidden="true">↗</span>
               </button>
             </div>
