@@ -1,0 +1,60 @@
+import { Suspense } from "react";
+import { notFound, permanentRedirect } from "next/navigation";
+import GraduationTemplate01 from "@/components/templates/GraduationTemplate01";
+import { recipientIdFromToken } from "@/lib/admin-auth";
+import { normalizeRecipientName } from "@/lib/invitation-recipients";
+import { invitationRecipientsCollection, invitationsCollection } from "@/lib/mongodb";
+
+export async function generateMetadata() {
+  return {
+    title: "Thiệp mời tốt nghiệp",
+    robots: { index: false, follow: false },
+  };
+}
+
+function InvitationLoading() {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-[#eeedf0] text-sm text-slate-500">
+      Đang tải thiệp…
+    </main>
+  );
+}
+
+export default function RecipientInvitationPage({ params }) {
+  return (
+    <Suspense fallback={<InvitationLoading />}>
+      <RecipientInvitationDetails params={params} />
+    </Suspense>
+  );
+}
+
+async function RecipientInvitationDetails({ params }) {
+  const { slug, token } = await params;
+  let recipientId;
+  try {
+    recipientId = recipientIdFromToken(token);
+  } catch {
+    notFound();
+  }
+  if (!recipientId) notFound();
+
+  const [recipients, invitations] = await Promise.all([
+    invitationRecipientsCollection(),
+    invitationsCollection(),
+  ]);
+  const [recipient, invitation] = await Promise.all([
+    recipients.findOne({ _id: recipientId }, { projection: { name: 1, slug: 1 } }),
+    invitations.findOne(
+      { _id: "template-01", published: true },
+      { projection: { _id: 0, published: 0, updatedAt: 0 } }
+    ),
+  ]);
+  if (!recipient || !invitation) notFound();
+
+  const canonicalSlug = recipient.slug || normalizeRecipientName(recipient.name);
+  if (slug !== canonicalSlug) {
+    permanentRedirect(`/invite/${encodeURIComponent(canonicalSlug)}/${encodeURIComponent(token)}`);
+  }
+
+  return <GraduationTemplate01 invitation={invitation} recipientName={recipient.name} />;
+}
