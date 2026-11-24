@@ -1,0 +1,779 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+.grad-page {
+  --grad-gold: #c6a45b;
+  --grad-gold-light: #f1d99b;
+  --grad-gold-dark: #765522;
+  --grad-black: #090909;
+  min-height: 100svh;
+  padding: 20px 12px 36px;
+  overflow-x: clip;
+  color: #f5edda;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(198, 164, 91, 0.12),
+      transparent 42%
+    ),
+    #050505;
+  font-family: "Montserrat", sans-serif;
+}
+
+.grad-card {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 520px);
+  min-height: 100svh;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(198, 164, 91, 0.42);
+  background:
+    radial-gradient(
+      ellipse at 50% 20%,
+      rgba(198, 164, 91, 0.075),
+      transparent 48%
+    ),
+    linear-gradient(160deg, #111 0%, #080808 58%, #101010 100%);
+  box-shadow:
+    0 24px 90px rgba(0, 0, 0, 0.6),
+    0 0 35px rgba(198, 164, 91, 0.06);
+}
+
+.grad-card-grain {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 70px,
+    rgba(255, 255, 255, 0.08) 71px,
+    transparent 73px
+  );
+}
+
+.grad-header {
+  position: relative;
+  z-index: 2;
+  padding: 30px 22px 22px;
+  text-align: center;
+}
+
+.grad-university-lockup {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 25px;
+}
+
+.grad-university-logo {
+  width: 66px;
+  height: 56px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(198, 164, 91, 0.15));
+}
+
+.grad-logo-placeholder {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border: 1px solid var(--grad-gold);
+  border-radius: 50%;
+  color: var(--grad-gold-light);
+  font-size: 25px;
+}
+
+.grad-university-name {
+  max-width: 230px;
+  color: var(--grad-gold-light);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.grad-university-name span {
+  display: block;
+  margin-top: 3px;
+  color: rgba(241, 217, 155, 0.65);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+}
+
+.grad-title {
+  margin: 0;
+  color: transparent;
+  background: linear-gradient(
+    105deg,
+    #8c6a2e 0%,
+    #f8e6ad 28%,
+    #bd974c 48%,
+    #fff0bd 64%,
+    #9c7737 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(34px, 9vw, 49px);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: 0.035em;
+  text-shadow: 0 5px 24px rgba(198, 164, 91, 0.12);
+  text-transform: uppercase;
+}
+
+.grad-script {
+  margin: 0;
+  color: var(--grad-gold-light);
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(27px, 7vw, 38px);
+  line-height: 1.35;
+}
+
+.grad-city {
+  margin: 12px 0 0;
+  color: rgba(245, 237, 218, 0.7);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.23em;
+  text-transform: uppercase;
+}
+
+.grad-gold-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(76%, 260px);
+  margin: 22px auto 0;
+  color: var(--grad-gold);
+  font-size: 11px;
+}
+
+.grad-gold-divider::before,
+.grad-gold-divider::after {
+  height: 1px;
+  flex: 1;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(198, 164, 91, 0.85));
+}
+
+.grad-gold-divider::after {
+  transform: rotate(180deg);
+}
+
+.grad-ribbon {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 5%;
+  width: clamp(76px, 22%, 112px);
+  height: clamp(250px, 38vw, 330px);
+  padding: 5px;
+  background: linear-gradient(
+    100deg,
+    #6f5122,
+    #f1d99b 25%,
+    #9b7638 55%,
+    #e7cc8b 78%,
+    #624719
+  );
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5));
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
+  transform-origin: top center;
+  animation: grad-ribbon-drop 0.9s cubic-bezier(0.2, 0.75, 0.25, 1) 0.35s both;
+}
+
+.grad-ribbon-inner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 239, 194, 0.8);
+  background: linear-gradient(155deg, #171717, #050505 72%);
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
+}
+
+.grad-ribbon-name {
+  color: var(--grad-gold-light);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(13px, 3.4vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.grad-ribbon-faculty {
+  max-width: 78%;
+  color: rgba(241, 217, 155, 0.75);
+  font-size: 6px;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.grad-hero {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  margin: 0 auto;
+}
+
+.grad-photo-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 9 / 14.8;
+  border: 1px solid rgba(241, 217, 155, 0.55);
+  border-radius: 23px;
+  background: #171717;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.48),
+    0 0 0 5px rgba(198, 164, 91, 0.055);
+}
+
+.grad-hero-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation:
+    grad-photo-reveal 1.4s ease both,
+    grad-photo-drift 24s ease-in-out 1.4s infinite alternate;
+  will-change: transform;
+}
+
+.grad-photo-placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: var(--grad-gold-light);
+  background: radial-gradient(circle at 50% 35%, #34302a, #101010 70%);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+  letter-spacing: 0.18em;
+}
+
+.grad-photo-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.04) 48%,
+    rgba(0, 0, 0, 0.58) 100%
+  );
+}
+
+.grad-year {
+  position: absolute;
+  top: 17px;
+  right: 15px;
+  padding: 7px 11px;
+  border: 1px solid rgba(241, 217, 155, 0.7);
+  background: rgba(8, 8, 8, 0.56);
+  color: var(--grad-gold-light);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  backdrop-filter: blur(8px);
+}
+
+.grad-photo-caption {
+  position: absolute;
+  right: 18px;
+  bottom: 22px;
+  left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: rgba(255, 246, 224, 0.82);
+  text-align: right;
+}
+
+.grad-photo-caption span {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+}
+
+.grad-photo-caption strong {
+  color: var(--grad-gold-light);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+}
+
+.grad-invitation {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  margin: 0 auto;
+  padding: 32px 3px 25px;
+  text-align: center;
+}
+
+.grad-closing {
+  margin: 0;
+  color: var(--grad-gold-light);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 17px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.grad-secondary {
+  margin: 7px 0 0;
+  color: rgba(245, 237, 218, 0.5);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+
+.grad-eyebrow,
+.grad-recipient-label,
+.grad-countdown-heading {
+  color: rgba(241, 217, 155, 0.7);
+  font-size: 9px;
+  letter-spacing: 0.23em;
+}
+
+.grad-eyebrow {
+  margin: 25px 0 0;
+}
+.grad-recipient-label {
+  margin: 17px 0 0;
+}
+
+.grad-recipient {
+  margin: 5px 0 0;
+  color: var(--grad-gold-light);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 27px;
+  font-weight: 500;
+}
+
+.grad-event-title {
+  margin: 17px 0 0;
+  color: #f7f0df;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 29px;
+  font-weight: 500;
+}
+
+.grad-graduate-subtitle {
+  margin: 6px 0 0;
+  color: rgba(245, 237, 218, 0.65);
+  font-size: 12px;
+}
+
+.grad-event-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.grad-detail {
+  display: flex;
+  min-height: 95px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 11px;
+  padding: 13px 9px;
+  border: 1px solid rgba(198, 164, 91, 0.38);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.035),
+    rgba(198, 164, 91, 0.025)
+  );
+}
+
+.grad-detail-label {
+  color: var(--grad-gold);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+
+.grad-detail-value {
+  color: rgba(250, 245, 232, 0.85);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.grad-address,
+.grad-message {
+  margin: 17px auto 0;
+  color: rgba(245, 237, 218, 0.64);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.grad-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 11px 19px;
+  border: 1px solid var(--grad-gold);
+  color: var(--grad-gold-light);
+  font-size: 9px;
+  letter-spacing: 0.17em;
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.grad-map-link:hover {
+  transform: translateY(-2px);
+  background: var(--grad-gold);
+  color: #090909;
+}
+
+.grad-countdown-wrap {
+  max-width: 340px;
+  margin: 35px auto 0;
+}
+
+.grad-countdown-heading {
+  margin: 0 0 15px;
+}
+
+.grad-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.grad-countdown-unit {
+  display: flex;
+  min-height: 72px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(198, 164, 91, 0.35);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.grad-countdown-number {
+  color: var(--grad-gold-light);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 26px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  animation: grad-number-change 0.3s ease;
+}
+
+.grad-countdown-label {
+  color: rgba(245, 237, 218, 0.52);
+  font-size: 7px;
+  letter-spacing: 0.17em;
+}
+
+.grad-countdown-finished {
+  color: var(--grad-gold-light);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+
+.grad-footer {
+  padding: 0 20px 35px;
+  color: rgba(241, 217, 155, 0.7);
+  text-align: center;
+}
+
+.grad-footer .grad-gold-divider {
+  margin-bottom: 15px;
+}
+.grad-footer p {
+  font-size: 8px;
+  letter-spacing: 0.23em;
+}
+.grad-footer > span {
+  color: var(--grad-gold);
+  font-size: 13px;
+}
+
+.grad-music-button {
+  position: fixed;
+  z-index: 30;
+  right: max(18px, calc((100vw - 520px) / 2 + 18px));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(241, 217, 155, 0.8);
+  border-radius: 50%;
+  background: rgba(12, 12, 12, 0.88);
+  color: var(--grad-gold-light);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  font-size: 18px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.grad-music-button:hover {
+  transform: scale(1.07);
+}
+.grad-music-button.is-playing {
+  animation: grad-music-pulse 2.4s ease-in-out infinite;
+}
+
+.grad-cover {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background:
+    radial-gradient(
+      ellipse at 50% 40%,
+      rgba(198, 164, 91, 0.12),
+      transparent 48%
+    ),
+    rgba(5, 5, 5, 0.98);
+  opacity: 1;
+  transition:
+    opacity 0.85s ease,
+    transform 0.95s cubic-bezier(0.7, 0, 0.2, 1),
+    visibility 0.95s;
+}
+
+.grad-cover--opening {
+  visibility: hidden;
+  transform: scale(1.035);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.grad-cover-content {
+  width: 100%;
+  max-width: 310px;
+  text-align: center;
+}
+
+.grad-cover-emblem {
+  display: grid;
+  width: 94px;
+  height: 94px;
+  place-items: center;
+  margin: 0 auto 26px;
+  border: 1px solid var(--grad-gold);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 7px rgba(198, 164, 91, 0.06),
+    inset 0 0 28px rgba(198, 164, 91, 0.09);
+  color: var(--grad-gold-light);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 35px;
+}
+
+.grad-cover-emblem img {
+  width: 65%;
+  height: 65%;
+  object-fit: contain;
+}
+
+.grad-cover-kicker {
+  color: var(--grad-gold);
+  font-size: 8px;
+  letter-spacing: 0.28em;
+}
+
+.grad-cover-title {
+  margin: 17px 0;
+  color: var(--grad-gold-light);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 42px;
+  line-height: 0.98;
+}
+
+.grad-cover-line {
+  width: 70px;
+  height: 1px;
+  margin: 20px auto;
+  background: var(--grad-gold);
+}
+
+.grad-cover-recipient {
+  color: rgba(245, 237, 218, 0.72);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+
+.grad-cover-message {
+  margin-top: 15px;
+  color: rgba(245, 237, 218, 0.65);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.grad-open-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 30px;
+  padding: 14px 21px;
+  border: 1px solid var(--grad-gold);
+  background: linear-gradient(110deg, #9c7839, #e6cc8c 48%, #987333);
+  color: #090909;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.grad-open-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(198, 164, 91, 0.2);
+}
+
+.grad-open-button:disabled {
+  cursor: default;
+}
+
+.grad-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.grad-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.grad-card--opened .grad-header > *,
+.grad-card--opened .grad-ribbon {
+  animation-play-state: running;
+}
+
+@keyframes grad-ribbon-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) scaleY(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes grad-photo-reveal {
+  from {
+    opacity: 0.45;
+    transform: scale(1.055);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes grad-photo-drift {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes grad-number-change {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes grad-music-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(198, 164, 91, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(198, 164, 91, 0);
+  }
+}
+
+@media (max-width: 380px) {
+  .grad-page {
+    padding: 8px 6px 24px;
+  }
+  .grad-header {
+    padding: 23px 15px 18px;
+  }
+  .grad-ribbon {
+    left: 4%;
+    width: 75px;
+    height: 245px;
+  }
+  .grad-photo-frame {
+    border-radius: 17px;
+  }
+  .grad-invitation {
+    width: 90%;
+  }
+  .grad-detail {
+    padding: 11px 6px;
+  }
+  .grad-detail-value {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .grad-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .grad-hero-image {
+    transform: none;
+  }
+}
+
+@media (hover: none) {
+  .grad-map-link:hover,
+  .grad-open-button:hover,
+  .grad-music-button:hover {
+    transform: none;
+  }
+}
