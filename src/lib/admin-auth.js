@@ -18,7 +18,10 @@ function sign(payload) {
 function safeEqual(left, right) {
   const leftBuffer = Buffer.from(left);
   const rightBuffer = Buffer.from(right);
-  return leftBuffer.length === rightBuffer.length && timingSafeEqual(leftBuffer, rightBuffer);
+  return (
+    leftBuffer.length === rightBuffer.length &&
+    timingSafeEqual(leftBuffer, rightBuffer)
+  );
 }
 
 export function isSameOriginRequest(request) {
@@ -35,23 +38,30 @@ export function credentialsMatch(username, password) {
   const configuredUsername = process.env.ADMIN_USERNAME;
   const configuredPassword = process.env.ADMIN_PASSWORD;
   if (!configuredUsername || !configuredPassword) return false;
-  return safeEqual(username, configuredUsername) && safeEqual(password, configuredPassword);
+  return (
+    safeEqual(username, configuredUsername) &&
+    safeEqual(password, configuredPassword)
+  );
 }
 
 export function sessionDurationSeconds() {
-  const configuredMinutes = Number.parseInt(process.env.SESSION_DURATION_MINUTES || "", 10);
+  const configuredMinutes = Number.parseInt(
+    process.env.SESSION_DURATION_MINUTES || "",
+    10,
+  );
   const defaultMinutes = 60 * 24 * 30;
   const minimumMinutes = 60 * 24 * 30;
   const maximumMinutes = 60 * 24 * 90;
-  const minutes = Number.isFinite(configuredMinutes) && configuredMinutes > 0
-    ? configuredMinutes
-    : defaultMinutes;
+  const minutes =
+    Number.isFinite(configuredMinutes) && configuredMinutes > 0
+      ? configuredMinutes
+      : defaultMinutes;
   return Math.min(Math.max(minutes, minimumMinutes), maximumMinutes) * 60;
 }
 
 export function createSessionToken() {
   const payload = Buffer.from(
-    JSON.stringify({ exp: Date.now() + sessionDurationSeconds() * 1000 })
+    JSON.stringify({ exp: Date.now() + sessionDurationSeconds() * 1000 }),
   ).toString("base64url");
   return `${payload}.${sign(payload)}`;
 }
