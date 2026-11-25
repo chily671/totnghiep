@@ -26,17 +26,6 @@ const EMPTY_INVITATION = Object.freeze({
   graduationYear: "",
 });
 
-useEffect(() => {
-  const audio = document.querySelector("audio");
-
-  console.log({
-    src: audio?.src,
-    currentSrc: audio?.currentSrc,
-    readyState: audio?.readyState,
-    error: audio?.error,
-  });
-}, []);
-
 function formatEventDate(value) {
   if (!value) return "";
   const date = new Date(value);
@@ -411,6 +400,17 @@ export default function GraduationTemplate01({
   const [opening, setOpening] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const audioRef = useRef(null);
+
+  useEffect(() => {
+    const audio = document.querySelector("audio");
+
+    console.log({
+      src: audio?.src,
+      currentSrc: audio?.currentSrc,
+      readyState: audio?.readyState,
+      error: audio?.error,
+    });
+  }, []);
 
   const handleOpenInvitation = async () => {
     try {
