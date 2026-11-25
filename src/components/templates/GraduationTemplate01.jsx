@@ -119,7 +119,7 @@ function GraduationDateCard({
             <circle cx="12" cy="9" r="2.7" />
           </svg>
         </div>
-        <span className="grad-date-at">TẠI ĐIỂM</span>
+        <span className="grad-date-at">Địa điểm</span>
         <strong className="whitespace-pre-line">
           {venueName || "ĐỊA ĐIỂM ĐANG CẬP NHẬT"}
         </strong>
