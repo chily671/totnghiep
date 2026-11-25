@@ -55,6 +55,10 @@ const TEXTAREA_FIELDS = {
     placeholder:
       "Ví dụ:\n12 Nguyễn Văn Bảo,\nPhường 4, Gò Vấp,\nTP. Hồ Chí Minh",
   },
+  universityName: {
+    rows: 3,
+    placeholder: "Ví dụ:\nTRƯỜNG ĐẠI HỌC ...\nKHOA CÔNG NGHỆ THÔNG TIN",
+  },
 };
 
 async function readJson(response) {
