@@ -26,13 +26,16 @@ const EMPTY_INVITATION = Object.freeze({
   graduationYear: "",
 });
 
-const audio = document.querySelector("audio");
-console.log({
-  src: audio?.src,
-  currentSrc: audio?.currentSrc,
-  readyState: audio?.readyState,
-  error: audio?.error,
-});
+useEffect(() => {
+  const audio = document.querySelector("audio");
+
+  console.log({
+    src: audio?.src,
+    currentSrc: audio?.currentSrc,
+    readyState: audio?.readyState,
+    error: audio?.error,
+  });
+}, []);
 
 function formatEventDate(value) {
   if (!value) return "";
