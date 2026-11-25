@@ -165,7 +165,12 @@ function GraduationDateCard({
               {contactPhone}
             </a>
           ) : (
-            <span className="grad-date-map-hint">0869834020</span>
+            <>
+              <span className="grad-date-map-hint">0869834020</span>
+              <span className="grad-date-action-label">
+                hoặc nhắn Messenger · Zalo
+              </span>
+            </>
           )}
         </div>
       </div>
