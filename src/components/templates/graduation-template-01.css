@@ -130,12 +130,12 @@
   display: block;
   width: 100%;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 10px;
-  color: var(--grad-gold-light);
+  font-size: clamp(9px, 1.1vw, 11px);
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: 0.065em;
-  white-space: normal;
+
+  white-space: pre-line;
   overflow-wrap: break-word;
   word-break: normal;
 }
