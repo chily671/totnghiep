@@ -415,10 +415,13 @@
   font-weight: 500;
 }
 
-.grad-graduate-subtitle {
-  margin: 6px 0 0;
-  color: #f7f0df;
-  font-size: 30px;
+.grad-cover-recipient {
+  color: rgba(245, 237, 218, 0.72);
+  font-size: clamp(5px, 1.8vw, 8px);
+  letter-spacing: clamp(0.04em, 0.18vw, 0.18em);
+  white-space: nowrap;
+  max-width: 100%;
+  text-align: center;
 }
 
 .grad-event-details {
