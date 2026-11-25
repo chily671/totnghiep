@@ -6,6 +6,7 @@ import {
   invitationRecipientsCollection,
   invitationsCollection,
 } from "@/lib/mongodb";
+import { connection } from "next/server";
 
 export async function generateMetadata() {
   return {
@@ -31,6 +32,9 @@ export default function RecipientInvitationPage({ params }) {
 }
 
 async function RecipientInvitationDetails({ params }) {
+  // Yêu cầu Next.js render tại thời điểm có request
+  await connection();
+
   const { slug, token } = await params;
 
   const [recipients, invitations] = await Promise.all([

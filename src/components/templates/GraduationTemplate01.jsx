@@ -26,6 +26,14 @@ const EMPTY_INVITATION = Object.freeze({
   graduationYear: "",
 });
 
+const audio = document.querySelector("audio");
+console.log({
+  src: audio?.src,
+  currentSrc: audio?.currentSrc,
+  readyState: audio?.readyState,
+  error: audio?.error,
+});
+
 function formatEventDate(value) {
   if (!value) return "";
   const date = new Date(value);
@@ -82,7 +90,14 @@ function GraduationDateCard({
       aria-label="Thông tin ngày và địa điểm tổ chức"
     >
       <div className="grad-date-card-top">
-        <span className="grad-date-card-kicker">THÂN MỜI</span>
+        <span className="grad-date-card-kicker grad-lourena">
+          <span className="grad-lourena">
+            {String.fromCodePoint(0xe120)}
+            hân
+            {String.fromCodePoint(0xe113)}
+            ời
+          </span>
+        </span>
         <span className="grad-date-card-time">
           {date ? `${date.time} · ${date.weekday}` : "THỜI GIAN TỔ CHỨC"}
         </span>
@@ -106,18 +121,21 @@ function GraduationDateCard({
       </div>
 
       <div className="grad-date-venue">
+        <div className="grad-date-pin" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="presentation">
+            <path d="M12 22s8-8.2 8-13A8 8 0 1 0 4 9c0 4.8 8 13 8 13Z" />
+            <circle cx="12" cy="9" r="2.7" />
+          </svg>
+        </div>
         <span className="grad-date-at">TẠI ĐIỂM</span>
-        <strong>{venueName || "ĐỊA ĐIỂM ĐANG CẬP NHẬT"}</strong>
+        <strong className="whitespace-pre-line">
+          {venueName || "ĐỊA ĐIỂM ĐANG CẬP NHẬT"}
+        </strong>
         {venueAddress && (
-          <span className="grad-date-address">{venueAddress}</span>
+          <span className="grad-date-address whitespace-pre-line">
+            {venueAddress}
+          </span>
         )}
-      </div>
-
-      <div className="grad-date-pin" aria-hidden="true">
-        <svg viewBox="0 0 24 24" role="presentation">
-          <path d="M12 22s8-8.2 8-13A8 8 0 1 0 4 9c0 4.8 8 13 8 13Z" />
-          <circle cx="12" cy="9" r="2.7" />
-        </svg>
       </div>
 
       <div className="grad-date-actions">
@@ -138,7 +156,7 @@ function GraduationDateCard({
         </div>
 
         <div className="grad-date-action grad-date-contact">
-          <span className="grad-date-action-label">LIÊN HỆ</span>
+          <span className="grad-date-action-label">HÃY LIÊN HỆ KHI TỚI</span>
           {contactPhone ? (
             <a
               className="grad-date-contact-link"
@@ -314,11 +332,11 @@ function GraduationWishes({ onSubmitWish }) {
   return (
     <section className="grad-wishes grad-reveal">
       <div className="grad-wishes-heading">
-        <span className="grad-wishes-kicker">A NOTE FROM YOU</span>
-        <h2>Leave Your Wishes</h2>
+        <span className="grad-wishes-kicker">Sổ lưu bút</span>
+        <h2>Gửi lời chúc</h2>
         <p>
           Một lời chúc nhỏ của bạn sẽ làm cho ngày đặc biệt này trở nên đáng nhớ
-          hơn.
+          hơn. Lời chúc sẽ được gửi riêng đến Kiều Chí.
         </p>
       </div>
 
@@ -342,7 +360,7 @@ function GraduationWishes({ onSubmitWish }) {
           <textarea
             value={content}
             onChange={(event) => setContent(event.target.value)}
-            placeholder="Gửi đôi lời chúc mừng đến tân cử nhân..."
+            placeholder="Gửi đôi lời chúc mừng đến tân cử nhân Lý Kiều Chí..."
             maxLength={500}
             rows={4}
             required
@@ -452,7 +470,18 @@ export default function GraduationTemplate01({
     }
   };
 
-  const openInvitation = () => setOpening(true);
+  const openInvitation = async () => {
+    try {
+      setOpening(true);
+
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        await audioRef.current.play();
+      }
+    } catch (error) {
+      console.log("Không thể phát nhạc:", error);
+    }
+  };
 
   return (
     <main className="grad-page" style={{ "--grad-gold": accentColor }}>
@@ -545,7 +574,6 @@ export default function GraduationTemplate01({
 
           <GoldDivider />
 
-          <p className="grad-eyebrow">YOU ARE CORDIALLY INVITED</p>
           {recipientName && (
             <>
               <p className="grad-recipient-label">TRÂN TRỌNG KÍNH MỜI</p>
@@ -581,9 +609,11 @@ export default function GraduationTemplate01({
         <GraduationWishes onSubmitWish={onSubmitWish} />
 
         <footer className="grad-footer grad-reveal">
-          <GoldDivider />
-          <p>WITH GRATITUDE & PRIDE</p>
-          <span>✦</span>
+          <img
+            src="https://res.cloudinary.com/disii3spb/image/upload/v1795574277/Ch%C6%B0a_c%C3%B3_t%C3%AAn_1920_x_1920_px_4_yegwwm.png"
+            alt="With Gratitude & Pride"
+            className="grad-gratitude-image"
+          />
         </footer>
 
         {musicUrl && (
@@ -612,16 +642,12 @@ export default function GraduationTemplate01({
               <div className="grad-cover-emblem">
                 {logoImage ? <img src={logoImage} alt="" /> : <span>✦</span>}
               </div>
-              <p className="grad-cover-kicker">A MOMENT TO REMEMBER</p>
-              <p className="grad-cover-title">
-                Graduation
-                <br />
-                Celebration
-              </p>
+              <p className="grad-cover-kicker">Thư mời điện tử</p>
+              <p className="grad-cover-title">Lễ Tốt nghiệp</p>
               <div className="grad-cover-line" />
               <p className="grad-cover-recipient">
                 {recipientName
-                  ? `PREPARED FOR ${recipientName}`
+                  ? `Xin trân trọng gửi lời mời đến ${recipientName}`
                   : "A PERSONAL INVITATION"}
               </p>
               {data.invitationMessage && (

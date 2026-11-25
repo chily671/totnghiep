@@ -41,6 +41,22 @@ const TEXT_FIELDS = [
   ["graduationYear", "Năm tốt nghiệp", "2026"],
 ];
 
+const TEXTAREA_FIELDS = {
+  faculty: {
+    rows: 3,
+    placeholder: "Ví dụ:\nKHOA CÔNG NGHỆ THÔNG TIN\nNGÀNH KỸ THUẬT PHẦN MỀM",
+  },
+  venueName: {
+    rows: 2,
+    placeholder: "Ví dụ:\nHỘI TRƯỜNG A\nTRƯỜNG ĐẠI HỌC ...",
+  },
+  venueAddress: {
+    rows: 3,
+    placeholder:
+      "Ví dụ:\n12 Nguyễn Văn Bảo,\nPhường 4, Gò Vấp,\nTP. Hồ Chí Minh",
+  },
+};
+
 async function readJson(response) {
   const result = await response.json();
   if (!response.ok) throw new Error(result.error || "Đã xảy ra lỗi.");
@@ -546,16 +562,29 @@ export default function AdminDashboard() {
               <div className="grid gap-5 sm:grid-cols-2">
                 {TEXT_FIELDS.slice(0, 6).map(([field, label, hint]) => (
                   <Field key={field} label={label}>
-                    <input
-                      value={invitation[field] ?? ""}
-                      onChange={(event) =>
-                        updateField(field, event.target.value)
-                      }
-                      placeholder={hint}
-                      className="admin-input"
-                    />
+                    {TEXTAREA_FIELDS[field] ? (
+                      <textarea
+                        rows={TEXTAREA_FIELDS[field].rows}
+                        value={invitation[field] ?? ""}
+                        onChange={(event) =>
+                          updateField(field, event.target.value)
+                        }
+                        placeholder={TEXTAREA_FIELDS[field].placeholder}
+                        className="admin-input resize-y whitespace-pre-wrap"
+                      />
+                    ) : (
+                      <input
+                        value={invitation[field] ?? ""}
+                        onChange={(event) =>
+                          updateField(field, event.target.value)
+                        }
+                        placeholder={hint}
+                        className="admin-input"
+                      />
+                    )}
                   </Field>
                 ))}
+
                 <Field label="Màu Navy">
                   <div className="flex h-11 items-center gap-3 rounded-xl border border-slate-200 px-3">
                     <input
@@ -642,16 +671,29 @@ export default function AdminDashboard() {
               <div className="grid gap-5 sm:grid-cols-2">
                 {TEXT_FIELDS.slice(6).map(([field, label, hint]) => (
                   <Field key={field} label={label}>
-                    <input
-                      value={invitation[field] ?? ""}
-                      onChange={(event) =>
-                        updateField(field, event.target.value)
-                      }
-                      placeholder={hint}
-                      className="admin-input"
-                    />
+                    {TEXTAREA_FIELDS[field] ? (
+                      <textarea
+                        rows={TEXTAREA_FIELDS[field].rows}
+                        value={invitation[field] ?? ""}
+                        onChange={(event) =>
+                          updateField(field, event.target.value)
+                        }
+                        placeholder={TEXTAREA_FIELDS[field].placeholder}
+                        className="admin-input resize-y whitespace-pre-wrap"
+                      />
+                    ) : (
+                      <input
+                        value={invitation[field] ?? ""}
+                        onChange={(event) =>
+                          updateField(field, event.target.value)
+                        }
+                        placeholder={hint}
+                        className="admin-input"
+                      />
+                    )}
                   </Field>
                 ))}
+
                 <Field label="Ngày & giờ">
                   <input
                     type="datetime-local"
