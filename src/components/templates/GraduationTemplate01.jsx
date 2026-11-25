@@ -318,7 +318,7 @@ function GraduationWishes({ onSubmitWish }) {
 
       setName("");
       setContent("");
-      setStatus("Lời chúc đã được gửi. Cảm ơn bạn rất nhiều!");
+      setStatus("Lời chúc đã được gửi. Hẹn gặp bạn tại buổi lễ tốt nghiệp!");
     } catch (error) {
       setStatus(error?.message || "Không thể gửi lời chúc. Vui lòng thử lại.");
     } finally {
