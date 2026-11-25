@@ -514,7 +514,10 @@ export default function GraduationTemplate01({
               </div>
             )}
             <div className="grad-university-name">
-              {data.universityName}
+              <div className="grad-university-name-text">
+                {data.universityName}
+              </div>
+
               {data.city && <span>{data.city}</span>}
             </div>
           </div>

@@ -126,6 +126,20 @@
   text-transform: uppercase;
 }
 
+.grad-university-name-text {
+  display: block;
+  width: 100%;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 10px;
+  color: var(--grad-gold-light);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.065em;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
 .grad-university-name span {
   display: block;
   margin-top: 3px;
